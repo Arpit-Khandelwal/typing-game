@@ -19,7 +19,7 @@ const quoteElement = document.getElementById('quote');
 const messageElement = document.getElementById('message');
 const typedValueElement = document.getElementById('typed-value');
 
-document.getElementById('quote').addEventListener('click',()=>{
+document.getElementById('start').addEventListener('click',()=>{
     const randomQuote = Math.floor(quotes.length * Math.random());
 
     const quote = quotes[randomQuote]
@@ -29,7 +29,7 @@ document.getElementById('quote').addEventListener('click',()=>{
 
     const spanWords = words.map(function(word){return `<span>${word}</span>`});
 
-    quoteElement.innerHTML = spanWords.join('') //quote
+    quoteElement.innerHTML = spanWords.join(' ') //quote
 
     quoteElement.childNodes[0].classname = 'highlight'
 
@@ -42,28 +42,30 @@ document.getElementById('quote').addEventListener('click',()=>{
 });
 
 typedValueElement.addEventListener('input',()=>{
-    const currentWord = word[wordIndex]
-    const typeedValue = typedValueElement.value
+    console.log("typedValueElement ")
+    const currentWord = words[wordIndex]
+    const typedValue = typedValueElement.value
 
-    if(typeedValue === currentWord && wordIndex === words.length-1)
+    if(typedValue === currentWord && wordIndex === words.length-1)
     {
         const elapsedTime = new Date().getTime() - startTime
         const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
 
         messageElement.innerText = message;
     }
-    else if(typeedValue.endsWith(' ') && typeedValue.trim() === currentWord)
+    else if(typedValue.endsWith(' ') && typedValue.trim() === currentWord)
     {
+        console.log("Correct word")
         typedValueElement.value = '';
 
         wordIndex++;
 
-        for (const wordElemt of quoteElement.childNodes) wordElemt.classname = '';
+        for (const wordElement of quoteElement.childNodes) wordElement.className = '';
 
-        quoteElement.childNodes[wordIndex].classname='highlight'
+        quoteElement.childNodes[wordIndex].className = 'highlight';    
     }
 
-    else if(currentWord.startsWith(typeedValue)) typeedValue.classname=''
-    else typeedValue.classname='error'
+    else if(currentWord.startsWith(typedValue)) typedValue.className=''
+    else typedValue.className='error'
 });
 
