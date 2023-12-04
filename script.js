@@ -24,15 +24,15 @@ document.getElementById('start').addEventListener('click',()=>{
 
     const quote = quotes[randomQuote]
     words = quote.split(' ')
-
+    
     wordIndex = 0
 
     const spanWords = words.map(function(word){return `<span>${word}</span>`});
 
     quoteElement.innerHTML = spanWords.join(' ') //quote
 
-    quoteElement.childNodes[0].classname = 'highlight'
-
+    quoteElement.childNodes[0].className = 'highlight'
+    
     messageElement.innerText = '';
 
     typedValueElement.value = '';
@@ -62,10 +62,10 @@ typedValueElement.addEventListener('input',()=>{
 
         for (const wordElement of quoteElement.childNodes) wordElement.className = '';
 
-        quoteElement.childNodes[wordIndex].className = 'highlight';    
+        quoteElement.childNodes[wordIndex].className = 'highlight';
     }
-
-    else if(currentWord.startsWith(typedValue)) typedValue.className=''
-    else typedValue.className='error'
+    
+    else if(currentWord.startsWith(typedValue)) typedValueElement.className=''
+    else typedValueElement.className='error'
 });
 
